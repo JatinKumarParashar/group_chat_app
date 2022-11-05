@@ -1,0 +1,14 @@
+div{
+    display: block;
+    text-align: center;
+}
+
+li{
+    display:flex;
+
+}
+
+footer{
+    display:flex;
+    text-align: center;
+}
