@@ -1,4 +1,4 @@
-const port='http:localhost:3000'
+const port='http:localhost:3000';
 
 
 
@@ -18,6 +18,7 @@ async function save(event){
 
         console.log('response >>>>>',response);
         alert('User has signUp Successfully')
+        window.location.href="C:/Users/jaykp/Desktop/group_chat_app/FrontEnd/login.html"
     }).catch(err=>{
         console.log(err);
         alert('You have already exist or invalid inputs')
