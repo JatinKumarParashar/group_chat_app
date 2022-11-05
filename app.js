@@ -10,6 +10,9 @@ app=express();
 
 const sequelize = require('./util/database');
 
+const User=require('./models/user');
+const Message=require('./models/message');
+
 
 app.use(bodyParsed.json());
 app.use(bodyParsed.urlencoded({ extended: true }));
@@ -21,8 +24,13 @@ app.use(bodyParsed.urlencoded({ extended: true }));
 app.use(cors());
 
 const userRoutes=require('./routes/user');
+const chatAppRoutes=require('./routes/chatapp');
 
 app.use('/user',userRoutes);
+app.use('/chatApp',chatAppRoutes);
+
+User.hasMany(Message);
+Message.belongsTo(User);
 
 sequelize //.sync({force:true})
     .sync()

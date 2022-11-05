@@ -17,6 +17,7 @@ function save(event){
         console.log(response);
         alert('Login successfully')
         localStorage.setItem('token', response.data.token);
+        window.location.href='C:/Users/jaykp/Desktop/group_chat_app/FrontEnd/chat.html'
 
     }).catch(err=>{
         if (err.response.status == 401) {
