@@ -3,6 +3,9 @@ const bodyParsed=require('body-parser');
 const cors=require('cors');
 
 
+const dotenv=require('dotenv');
+dotenv.config();
+
 app=express();
 
 const sequelize = require('./util/database');
