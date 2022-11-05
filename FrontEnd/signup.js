@@ -14,8 +14,17 @@ async function save(event){
         number,
         password
     }
-    const response=await axios.post(`${port}/user/add-user`,obj);
-    console.log('response >>>>>',response);
+    await axios.post(`${port}/user/add-user`,obj).then(response=>{
+
+        console.log('response >>>>>',response);
+        alert('User has signUp Successfully')
+    }).catch(err=>{
+        console.log(err);
+        alert('You have already exist or invalid inputs')
+
+    })
+    
+    
 
 
 }

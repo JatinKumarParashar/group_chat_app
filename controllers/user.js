@@ -22,6 +22,7 @@ exports.postSignUp = (req, res, next) => {
         })
             .catch(err => {
                 console.log(err);
+                res.status(500).json(err);
                 console.log('Or you have entered existing email');
             })
     })
