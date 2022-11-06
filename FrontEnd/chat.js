@@ -25,10 +25,26 @@ function save(event) {
 	
 	window.addEventListener('DOMContentLoaded', () => {
 	   setInterval(() => {
-	 axios.get(`${port}/chatApp/get-message`, { headers: { 'Authorization': token } })
+           messages.innerHTML='';
+        var oldMessage=localStorage.getItem('oldMessage');
+        var lastMessage=-1;
+        var oldMessageParse=JSON.parse(oldMessage);
+        console.log('oldMessage in LocalStorage',oldMessageParse);
+        if(oldMessageParse){
+            for(let i=0;i<oldMessageParse.length;i++){
+                showMessageOnScreen(oldMessageParse[i]);
+
+                lastMessage=oldMessageParse[i].id;
+            }
+        }
+        console.log('lastMessage id',lastMessage);
+	 axios.get(`${port}/chatApp/get-message?lastMessage=${lastMessage}`, { headers: { 'Authorization': token } })
 	        .then(result => {
-	            console.log('frontEnd/chat.js line 25 ', result.data);
-                messages.innerHTML='';
+	            console.log('frontEnd/chat.js line 43 ', result.data);
+                const newMessage=result.data;
+                oldMessageParse=[...oldMessageParse,...newMessage];
+                const oldMessageStringify=JSON.stringify(oldMessageParse);
+                localStorage.setItem('oldMessage',oldMessageStringify);
 	            for (let i = 0; i < result.data.length; i++) {
 	                showMessageOnScreen(result.data[i]);
 	            }

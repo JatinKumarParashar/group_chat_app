@@ -1,5 +1,5 @@
 const Message=require('../models/message');
-
+const { Op } = require("sequelize");
 exports.postMessage=(req,res,next)=>{
     const message=req.body.message;
     const userId=req.user.dataValues.id;
@@ -20,9 +20,10 @@ exports.postMessage=(req,res,next)=>{
 
 
 exports.getMessage=(req,res,next)=>{
-    Message.findAll()
+    const lastMessage=req.query.lastMessage;
+    Message.findAll({where:{id:{[Op.gt]:lastMessage}}})
     .then(result=>{
-        console.log('controllers/chatApp/getMessage line 25',result);
+       // console.log('controllers/chatApp/getMessage line 25',result);
         res.status(200).json(result);
     })
     .catch(err=>{
