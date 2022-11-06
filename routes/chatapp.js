@@ -5,6 +5,7 @@ const authenticationMiddleware=require('../middleware/auth');
 const router=express.Router();
 
 router.post('/post-message',authenticationMiddleware.authenticate,chatAppController.postMessage);
+router.get('/get-message',authenticationMiddleware.authenticate,chatAppController.getMessage);
 
 
 module.exports=router;
